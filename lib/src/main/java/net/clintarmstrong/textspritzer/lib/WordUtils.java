@@ -7,8 +7,7 @@ import android.util.Log;
  */
 public class WordUtils {
     public static final String TAG = "WORDUTILS";
-//  protected static final boolean VERBOSE = (BuildConfig.DEBUG);
-    protected static final boolean VERBOSE = true;
+    protected static final boolean VERBOSE = false;
 
     public static String[] getNextWord(String input){
         return input

@@ -7,7 +7,7 @@ import android.util.Log;
  */
 public class DefaultWordStrategy implements WordStrategy {
     protected static final int MAX_WORD_LENGTH = 13;
-    protected static final boolean VERBOSE = true;
+    protected static final boolean VERBOSE = false;
     protected static final String TAG = "DefaultWordStrategy";
 
     @Override
