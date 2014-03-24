@@ -9,15 +9,15 @@ Note: This library has nothing to do with SpritzInc.
 
 Differences include:
 
-* A multithreaded design.
-** Strings are parsed into words and delay is calculated in a separate thread, while already calculated words are being displayed.
-* Ability to add strings so the end of the queue
-* Ability to override the parsing function for custom delay calculation and word manipulation
-** This allows you to add metadata to the string which can be parsed out and used to calculate a delay.
-* Interface to register a callback when < x words are remaining to be displayed.
-* Interface to add a metadata callback. Overwrite the parsing function and set an integer callback value on the parsed wordobject. Your frontend will be notified when that word is displayed.
-* No sleeping threads.
-** After each word is displayed, the display of the next word is scheduled using a ScheduledThreadPool.
+- A multithreaded design.
+    - Strings are parsed into words and delay is calculated in a separate thread, while already calculated words are being displayed.
+- Ability to add strings so the end of the queue
+- Ability to override the parsing function for custom delay calculation and word manipulation
+    - This allows you to add metadata to the string which can be parsed out and used to calculate a delay.
+- Interface to register a callback when < x words are remaining to be displayed.
+- Interface to add a metadata callback. Overwrite the parsing function and set an integer callback value on the parsed wordobject. Your frontend will be notified when that word is displayed.
+- No sleeping threads.
+    - After each word is displayed, the display of the next word is scheduled using a ScheduledThreadPool.
 
 See the included sample app for how to implement the various features.
 
