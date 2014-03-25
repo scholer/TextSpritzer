@@ -21,7 +21,7 @@ Differences include:
 
 See the included sample app for how to implement the various features.
 
-Now in Maven Central. To add to your project use:
+Now in Maven Central. To add to your project add this to your build.gradle:
 
 ```
 dependencies {
