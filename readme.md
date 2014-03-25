@@ -22,11 +22,12 @@ Differences include:
 See the included sample app for how to implement the various features.
 
 Now in Maven Central. To add to your project use:
-...
+
+```
 dependencies {
     compile 'net.clintarmstrong:TextSpritzer:1.0.0'
 }
-...
+```
 License
 ------------
 ```
