@@ -1,7 +1,5 @@
 package net.clintarmstrong.textspritzer.lib;
 
-import android.util.Log;
-
 /**
  * Created by carmstrong on 3/20/14.
  */
@@ -13,16 +11,19 @@ public class DefaultWordStrategy implements WordStrategy {
     @Override
     public WordObj parseWord(String input){
         WordObj retWordObj = new WordObj();
-        
-        // Split first word from string, return remainingwords
-        if (VERBOSE) Log.d(TAG, "Splitting off first word.");
+
+        // Split first word from string. wordArray[0] will be the separated word we want to process, wordArray[1] is the remaining string.
         String[] wordArray = WordUtils.getNextWord(input);
 
+        // if there is no text remaining, set callback to 1 so that this thread can be notified.
+        // Useful for adding more text at regular intervals.
+        if (wordArray.length > 1) {
+            retWordObj.remainingWords = wordArray[1];
+        } else {
+            retWordObj.callback = 1;
+        }
         String word = wordArray[0];
-        if (VERBOSE) Log.d(TAG, "word is: " + word);
-        retWordObj.remainingWords = wordArray[1];
-        if (VERBOSE) Log.d(TAG, "Remaining words are: " + wordArray[1]);
-
+        int delayMultiplier = 1;
 
         // Split long words
         if (word.length() > MAX_WORD_LENGTH) {
@@ -31,14 +32,18 @@ public class DefaultWordStrategy implements WordStrategy {
             retWordObj.remainingWords = retWordObj.remainingWords + longWordArr[1] + " ";
         }
 
-        // Set Delay for punctuation and length
-        if (word.length() >= 6 || word.contains(",") || word.contains(":") || word.contains(";") || word.contains(".") || word.contains("?") || word.contains("!") || word.contains("\"")) {
-            retWordObj.delayMultiplier = 3;
-        } else {
-            retWordObj.delayMultiplier = 1;
+        // set delay 3x for words with punctuation, 1x for all others. Does not run if delaymultiplier is already set from metadata above.
+        if (delayMultiplier == 1){
+            if (word.length() >= 6 || word.contains(",") || word.contains(":") || word.contains(";") || word.contains(".") || word.contains("?") || word.contains("!") || word.contains("\"")) {
+                // Set Delay for punctuation and length
+                delayMultiplier = 2;
+            } else {
+                delayMultiplier = 1;
+            }
         }
 
         retWordObj.parsedWord = word;
+        retWordObj.delayMultiplier = delayMultiplier;
 
         return retWordObj;
     }

@@ -8,7 +8,11 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
-import net.clintarmstrong.textspritzer.lib.*;
+import net.clintarmstrong.textspritzer.lib.Spritzer;
+import net.clintarmstrong.textspritzer.lib.SpritzerTextView;
+import net.clintarmstrong.textspritzer.lib.WordObj;
+import net.clintarmstrong.textspritzer.lib.WordStrategy;
+import net.clintarmstrong.textspritzer.lib.WordUtils;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -96,6 +100,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
+
         mSpritzerTextView.setWordStrategy(new WordStrategy() {
             // import the default word strategy so we can use some of it's useful methods
             protected static final int MAX_WORD_LENGTH = 13;
@@ -140,26 +145,19 @@ public class MainActivity extends ActionBarActivity {
                 if (delayMultiplier == 1){
                     if (word.length() >= 6 || word.contains(",") || word.contains(":") || word.contains(";") || word.contains(".") || word.contains("?") || word.contains("!") || word.contains("\"")) {
                         // Set Delay for punctuation and length
-                        retWordObj.delayMultiplier = 3;
+                        delayMultiplier = 2;
                     } else {
-                        retWordObj.delayMultiplier = 1;
+                        delayMultiplier = 1;
                     }
                 }
 
                 retWordObj.parsedWord = word;
                 retWordObj.delayMultiplier = delayMultiplier;
 
-                /*
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                */
-
                 return retWordObj;
             }
         });
+
 
         setupSeekBars();
 
